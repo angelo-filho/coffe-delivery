@@ -1,4 +1,5 @@
 import { MapPin, ShoppingCart } from "phosphor-react";
+import { Link } from "react-router-dom";
 import logo from "../assets/Logo.svg";
 
 export function Header() {
@@ -6,15 +7,22 @@ export function Header() {
 
   return (
     <header className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4">
-      <img src={logo} alt="Logo Coffe Delivery" className="w-16 md:w-[85px]" />
+      <Link to="/">
+        <img
+          src={logo}
+          alt="Logo Coffe Delivery"
+          className="w-16 md:w-[85px]"
+        />
+      </Link>
 
       <div className="flex items-center gap-3">
         <span className="flex items-center gap-1 p-2 rounded-md text-sm text-purple-700 bg-purple-100">
           <MapPin size={22} weight="fill" className="text-purple-400" />
-          Porto Alegre, RS
+          Manaus, AM
         </span>
 
-        <button
+        <Link
+          to="/cart"
           type="button"
           className="relative p-2 rounded-md bg-yellow-100 text-yellow-700"
         >
@@ -25,7 +33,7 @@ export function Header() {
               3
             </span>
           )}
-        </button>
+        </Link>
       </div>
     </header>
   );
