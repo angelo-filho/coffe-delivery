@@ -26,10 +26,13 @@ module.exports = {
         },
         background: "#FAFAFA",
       },
+      spacing: {
+        18: "72px",
+      },
     },
     fontFamily: {
-      sans: ["Roboto", "sans-serif"],
-      cursive: ["Baloo 2", "cursive"],
+      sans: ["'Roboto'", "sans-serif"],
+      cursive: ["'Baloo 2'", "cursive"],
     },
   },
   plugins: [],

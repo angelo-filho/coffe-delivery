@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Header } from "./components/Header";
+import { Home } from "./pages/Home";
 import { Root } from "./pages/Root";
 
 const routes = createBrowserRouter([
@@ -9,7 +9,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: <Home />,
       },
       {
         path: "/cart",
