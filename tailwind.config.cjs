@@ -29,6 +29,12 @@ module.exports = {
       spacing: {
         18: "72px",
       },
+      backgroundImage: {
+        "hero-background": "url('/Background.svg')",
+      },
+      screens: {
+        xl: "1120px",
+      },
     },
     fontFamily: {
       sans: ["'Roboto'", "sans-serif"],

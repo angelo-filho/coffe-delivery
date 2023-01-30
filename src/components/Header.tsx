@@ -6,7 +6,7 @@ export function Header() {
   const cartHasItem = true;
 
   return (
-    <header className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4">
+    <header className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4 lg:py-8">
       <Link to="/">
         <img
           src={logo}
