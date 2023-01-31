@@ -1,6 +1,12 @@
 import coffee from "../../../assets/hero_coffee.png";
 
-import { IconProps, ShoppingCart } from "phosphor-react";
+import {
+  Coffee,
+  IconProps,
+  Package,
+  ShoppingCart,
+  Timer,
+} from "phosphor-react";
 import { cloneElement } from "react";
 
 const items = [
@@ -10,17 +16,17 @@ const items = [
     text: "Compra simples e segura",
   },
   {
-    icon: <ShoppingCart />,
+    icon: <Package />,
     bgColor: "bg-base-600",
     text: "Embalagem mantém o café intacto",
   },
   {
-    icon: <ShoppingCart />,
+    icon: <Timer />,
     bgColor: "bg-yellow-400",
     text: "Entrega rápida e rastreada",
   },
   {
-    icon: <ShoppingCart />,
+    icon: <Coffee />,
     bgColor: "bg-purple-400",
     text: "O café chega fresquinho até você",
   },
