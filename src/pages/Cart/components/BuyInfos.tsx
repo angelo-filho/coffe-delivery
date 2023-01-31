@@ -9,7 +9,7 @@ import { Input } from "./Input";
 
 export function BuyInfos() {
   return (
-    <section>
+    <section className="xl:col-span-3">
       <h3 className="font-cursive font-bold text-lg text-base-700">
         Complete seu pedido
       </h3>
