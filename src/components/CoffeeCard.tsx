@@ -1,4 +1,5 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { ItemCount } from "./ItemCount";
 
 interface Coffee {
   name: string;
@@ -45,15 +46,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         </strong>
 
         <div className="flex items-center gap-2 h-[2.375rem]">
-          <div className="p-2 h-full flex items-center gap-2 bg-base-300 rounded-md">
-            <button type="button" className="text-purple-400">
-              <Minus />
-            </button>
-            1
-            <button type="button" className="text-purple-400">
-              <Plus />
-            </button>
-          </div>
+          <ItemCount />
 
           <button className="p-2 h-full bg-purple-700 text-base-300 rounded-md">
             <ShoppingCart size={22} weight="fill" />
