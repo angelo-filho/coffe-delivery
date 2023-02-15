@@ -6,7 +6,7 @@ import {
   Money,
 } from "phosphor-react";
 
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import * as ToggleGroup from "@radix-ui/react-radio-group";
 
 import { Input } from "./Input";
 
@@ -67,27 +67,26 @@ export function BuyInfos() {
         </div>
 
         <ToggleGroup.Root
-          type="single"
           defaultValue="credit"
           className="grid md:grid-cols-3 gap-3"
         >
           <ToggleGroup.Item
             value="credit"
-            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='on']:bg-purple-100 data-[state='on']:ring-1 data-[state='on']:ring-purple-400"
+            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='checked']:bg-purple-100 data-[state='checked']:ring-1 data-[state='checked']:ring-purple-400"
           >
             <CreditCard size={16} className="text-purple-400" />
             CARTÃO DE CRÉDITO
           </ToggleGroup.Item>
           <ToggleGroup.Item
             value="debit"
-            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='on']:bg-purple-100 data-[state='on']:ring-1 data-[state='on']:ring-purple-400"
+            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='checked']:bg-purple-100 data-[state='checked']:ring-1 data-[state='checked']:ring-purple-400"
           >
             <Bank size={16} className="text-purple-400" />
             CARTÃO DE DÉBITO
           </ToggleGroup.Item>
           <ToggleGroup.Item
             value="money"
-            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='on']:bg-purple-100 data-[state='on']:ring-1 data-[state='on']:ring-purple-400"
+            className="p-4 flex items-center justify-center gap-3 text-xs text-base-600 bg-base-300 border rounded-md transition-colors hover:bg-base-400 data-[state='checked']:bg-purple-100 data-[state='checked']:ring-1 data-[state='checked']:ring-purple-400"
           >
             <Money size={16} className="text-purple-400" />
             DINHEIRO
