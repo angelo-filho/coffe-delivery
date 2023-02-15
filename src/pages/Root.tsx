@@ -5,9 +5,9 @@ import { CartProvider } from "../contexts/CartContext";
 export function Root() {
   return (
     <>
-      <Header />
-
       <CartProvider>
+        <Header />
+
         <Outlet />
       </CartProvider>
     </>

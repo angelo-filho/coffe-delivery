@@ -1,9 +1,10 @@
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.svg";
+import { useCart } from "../hooks/useCart";
 
 export function Header() {
-  const cartHasItem = true;
+  const { cartItems } = useCart();
 
   return (
     <header className="flex items-center justify-between w-full max-w-screen-xl mx-auto p-4 lg:py-8 xl:px-0">
@@ -28,9 +29,9 @@ export function Header() {
         >
           <ShoppingCart size={22} weight="fill" />
 
-          {cartHasItem && (
+          {cartItems?.length > 0 && (
             <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center font-bold text-xs text-white bg-yellow-700 ">
-              3
+              {cartItems.length}
             </span>
           )}
         </Link>

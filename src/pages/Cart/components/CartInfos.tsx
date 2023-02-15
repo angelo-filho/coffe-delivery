@@ -8,6 +8,8 @@ export function CartInfos() {
   const { cartItems, handleAddItemToCart, handleRemoveItemFromCart } =
     useCart();
 
+  console.log(cartItems?.length);
+
   return (
     <section className="mt-10 xl:mt-0 xl:col-span-2">
       <h3 className="font-cursive font-bold text-lg text-base-700">
