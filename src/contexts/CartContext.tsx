@@ -8,6 +8,7 @@ interface CartItem {
 interface CartContextType {
   cartItems: CartItem[];
   handleAddItemToCart: (quantity: number, itemName: string) => void;
+  handleRemoveItemFromCart: (itemName: string) => void;
 }
 
 interface CartProviderProps {
@@ -20,36 +21,47 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function handleAddItemToCart(quantity: number, itemName: string) {
-    if (quantity < 0) {
+    if (quantity <= 0) {
       return;
     }
 
     const cartItem = cartItems.find((item) => item.itemName === itemName);
 
     if (cartItem) {
-      setCartItems((prev) =>
-        prev.map((item) => {
-          if (item.itemName === itemName) {
-            item.quantity = quantity;
-          }
-
-          return item;
-        })
-      );
+      updateQuantityOfAnItem(quantity, itemName);
 
       return;
     }
 
-    setCartItems((prev) => [...prev, { itemName: itemName, quantity }]);
+    addItemToCart(quantity, itemName);
   }
 
-  console.log(cartItems);
+  function handleRemoveItemFromCart(itemName: string) {
+    setCartItems((prev) => prev.filter((items) => items.itemName !== itemName));
+  }
+
+  function updateQuantityOfAnItem(quantity: number, itemName: string) {
+    setCartItems((prev) =>
+      prev.map((item) => {
+        if (item.itemName === itemName) {
+          item.quantity = quantity;
+        }
+
+        return item;
+      })
+    );
+  }
+
+  function addItemToCart(quantity: number, itemName: string) {
+    setCartItems((prev) => [...prev, { itemName: itemName, quantity }]);
+  }
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
         handleAddItemToCart,
+        handleRemoveItemFromCart,
       }}
     >
       {children}

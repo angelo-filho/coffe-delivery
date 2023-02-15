@@ -1,10 +1,12 @@
 import { Trash } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { ItemCount } from "../../../components/ItemCount";
+import { useCart } from "../../../hooks/useCart";
 import { coffeesList } from "../../Home/data/coffeesList";
 
 export function CartInfos() {
-  const coffees = coffeesList.slice(0, 3);
+  const { cartItems, handleAddItemToCart, handleRemoveItemFromCart } =
+    useCart();
 
   return (
     <section className="mt-10 xl:mt-0 xl:col-span-2">
@@ -14,38 +16,53 @@ export function CartInfos() {
 
       <div className="mt-[15px] p-4 bg-base-100 rounded-md rounded-tr-[44px] rounded-bl-[44px] md:p-10">
         <ul>
-          {coffees.map((coffee) => (
-            <li
-              key={coffee.name}
-              className="flex justify-between py-6 border-b border-b-base-300 first:pt-0"
-            >
-              <div className="flex gap-5">
-                <img
-                  src={coffee.imgURL}
-                  alt="Café Tradicional"
-                  className="h-16 object-contain hidden sm:inline"
-                />
+          {cartItems.map((item) => {
+            const coffee = coffeesList.find(
+              (coffee) => coffee.name === item.itemName
+            );
 
-                <div className="flex flex-col gap-2">
-                  <span>{coffee.name}</span>
+            return (
+              <li
+                key={coffee!.name}
+                className="flex justify-between py-6 border-b border-b-base-300 first:pt-0"
+              >
+                <div className="flex gap-5">
+                  <img
+                    src={coffee!.imgURL}
+                    alt={coffee!.name}
+                    className="h-16 object-contain hidden sm:inline"
+                  />
 
-                  <div className="h-8 flex items-center gap-3">
-                    <ItemCount />
+                  <div className="flex flex-col gap-2">
+                    <span>{coffee!.name}</span>
 
-                    <button
-                      type="button"
-                      className="group p-2 flex items-center gap-2 bg-base-300 rounded-md text-xs hover:bg-base-400 transition-colors"
-                    >
-                      <Trash size={16} className="text-purple-400 " />
-                      REMOVER
-                    </button>
+                    <div className="h-8 flex items-center gap-3">
+                      <ItemCount
+                        quantity={item.quantity}
+                        onSubtract={() =>
+                          handleAddItemToCart(item.quantity - 1, item.itemName)
+                        }
+                        onAdd={() =>
+                          handleAddItemToCart(item.quantity + 1, item.itemName)
+                        }
+                      />
+
+                      <button
+                        type="button"
+                        className="group p-2 flex items-center gap-2 bg-base-300 rounded-md text-xs hover:bg-base-400 transition-colors"
+                        onClick={() => handleRemoveItemFromCart(coffee!.name)}
+                      >
+                        <Trash size={16} className="text-purple-400" />
+                        <span>REMOVER</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <strong className="text-base-700">R$ 9,90</strong>
-            </li>
-          ))}
+                <strong className="text-base-700">R$ 9,90</strong>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-6 flex flex-col gap-3">

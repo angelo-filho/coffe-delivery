@@ -1,6 +1,5 @@
-import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 import { ItemCount } from "./ItemCount";
 
@@ -20,7 +19,15 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
   const item = cartItems?.find((item) => item.itemName === coffee.name);
 
-  const quantity = item ? item.quantity : 0;
+  const [quantity, setQuantity] = useState(item ? item.quantity : 1);
+
+  function handleChangeQuantity(newQuantity: number) {
+    if (newQuantity <= 0) {
+      return;
+    }
+
+    setQuantity(newQuantity);
+  }
 
   return (
     <div className="w-[256px] px-6 pb-5 flex flex-col items-center bg-base-100 rounded-tl-md rounded-br-md rounded-tr-[64px] rounded-bl-[64px]">
@@ -28,7 +35,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         loading="lazy"
         src={coffee.imgURL}
         alt={coffee.name}
-        className="w-[120px] -mt-5"
+        className="w-[120px] h-[120px] -mt-5"
       />
 
       <div className="mt-3 flex items-center gap-1">
@@ -57,16 +64,16 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         <div className="flex items-center gap-2 h-[2.375rem]">
           <ItemCount
             quantity={quantity}
-            itemName={coffee.name}
-            handleAddItemToCart={handleAddItemToCart}
+            onSubtract={() => handleChangeQuantity(quantity - 1)}
+            onAdd={() => handleChangeQuantity(quantity + 1)}
           />
 
-          <Link
-            to={"/cart"}
+          <button
             className="p-2 h-full bg-purple-700 text-base-300 rounded-md transition-colors hover:bg-purple-400"
+            onClick={() => handleAddItemToCart(quantity, coffee.name)}
           >
             <ShoppingCart size={22} weight="fill" />
-          </Link>
+          </button>
         </div>
       </div>
     </div>
