@@ -1,4 +1,7 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 import { ItemCount } from "./ItemCount";
 
 interface Coffee {
@@ -13,6 +16,12 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
+  const { cartItems, handleAddItemToCart } = useCart();
+
+  const item = cartItems?.find((item) => item.itemName === coffee.name);
+
+  const quantity = item ? item.quantity : 0;
+
   return (
     <div className="w-[256px] px-6 pb-5 flex flex-col items-center bg-base-100 rounded-tl-md rounded-br-md rounded-tr-[64px] rounded-bl-[64px]">
       <img
@@ -46,11 +55,18 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
         </strong>
 
         <div className="flex items-center gap-2 h-[2.375rem]">
-          <ItemCount />
+          <ItemCount
+            quantity={quantity}
+            itemName={coffee.name}
+            handleAddItemToCart={handleAddItemToCart}
+          />
 
-          <button className="p-2 h-full bg-purple-700 text-base-300 rounded-md">
+          <Link
+            to={"/cart"}
+            className="p-2 h-full bg-purple-700 text-base-300 rounded-md transition-colors hover:bg-purple-400"
+          >
             <ShoppingCart size={22} weight="fill" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
