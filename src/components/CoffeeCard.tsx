@@ -1,6 +1,7 @@
 import { ShoppingCart } from "phosphor-react";
 import { useState } from "react";
 import { useCart } from "../hooks/useCart";
+import { currencyFormat } from "../utils/currencyFormat";
 import { ItemCount } from "./ItemCount";
 
 interface Coffee {
@@ -8,6 +9,7 @@ interface Coffee {
   description: string;
   tags: string[];
   imgURL: string;
+  price: number;
 }
 
 interface CoffeeCardProps {
@@ -28,6 +30,8 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
     setQuantity(newQuantity);
   }
+
+  const price = currencyFormat(coffee.price).replace("R$", "");
 
   return (
     <div className="w-[256px] px-6 pb-5 flex flex-col items-center bg-base-100 rounded-tl-md rounded-br-md rounded-tr-[64px] rounded-bl-[64px]">
@@ -58,7 +62,8 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
       <div className="w-full mt-8 flex items-center justify-between">
         <strong className="font-cursive font-extrabold text-2xl text-base-700">
-          <span className="font-sans font-normal text-sm">R$</span> 9,90
+          <span className="font-sans font-normal text-sm">R$</span>
+          <span>{price}</span>
         </strong>
 
         <div className="flex items-center gap-2 h-[2.375rem]">

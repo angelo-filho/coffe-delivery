@@ -2,13 +2,22 @@ import { Trash } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { ItemCount } from "../../../components/ItemCount";
 import { useCart } from "../../../hooks/useCart";
+import { currencyFormat } from "../../../utils/currencyFormat";
 import { coffeesList } from "../../Home/data/coffeesList";
 
 export function CartInfos() {
   const { cartItems, handleAddItemToCart, handleRemoveItemFromCart } =
     useCart();
 
-  console.log(cartItems?.length);
+  const itemsTotalPrice = cartItems.reduce((prev, item) => {
+    const coffee = coffeesList.find((coffee) => coffee.name === item.itemName);
+
+    return prev + coffee.price * item.quantity;
+  }, 0);
+
+  const deliveryPrice = itemsTotalPrice ? 3.5 : 0;
+
+  const totalToPay = itemsTotalPrice + deliveryPrice;
 
   return (
     <section className="mt-10 xl:mt-0 xl:col-span-2">
@@ -22,6 +31,8 @@ export function CartInfos() {
             const coffee = coffeesList.find(
               (coffee) => coffee.name === item.itemName
             );
+
+            const totalPrice = coffee.price! * item.quantity;
 
             return (
               <li
@@ -61,7 +72,9 @@ export function CartInfos() {
                   </div>
                 </div>
 
-                <strong className="text-base-700">R$ 9,90</strong>
+                <strong className="text-base-700">
+                  {currencyFormat(totalPrice)}
+                </strong>
               </li>
             );
           })}
@@ -70,17 +83,17 @@ export function CartInfos() {
         <div className="mt-6 flex flex-col gap-3">
           <div className="flex items-center justify-between text-base-600">
             <span>Total de itens</span>
-            <span>R$ 29,70</span>
+            <span>{currencyFormat(itemsTotalPrice)}</span>
           </div>
 
           <div className="flex items-center justify-between text-base-600">
             <span>Entrega</span>
-            <span>R$ 3,50</span>
+            <span>{currencyFormat(deliveryPrice)}</span>
           </div>
 
           <div className="flex items-center justify-between text-xl font-bold text-base-600">
             <strong>Total</strong>
-            <strong>R$ 33,20</strong>
+            <strong>{currencyFormat(totalToPay)}</strong>
           </div>
         </div>
 
