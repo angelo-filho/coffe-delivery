@@ -5,6 +5,8 @@ import { currencyFormat } from "../../../utils/currencyFormat";
 import { coffeesList } from "../../Home/data/coffeesList";
 import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFormContext } from "react-hook-form";
+import { AddressFormType } from "..";
 
 export function CartInfos() {
   const {
@@ -13,6 +15,8 @@ export function CartInfos() {
     handleRemoveItemFromCart,
     handleMakeCartEmpty,
   } = useCart();
+
+  const { handleSubmit } = useFormContext<AddressFormType>();
 
   const navigate = useNavigate();
 
@@ -26,8 +30,14 @@ export function CartInfos() {
 
   const totalToPay = itemsTotalPrice + deliveryPrice;
 
-  function handleConfirmOrder() {
-    navigate("/success?nome=angelo&sobrenome=filho");
+  function handleConfirmOrder(data: AddressFormType) {
+    const { street, number, district, city, uf, paymentMethod } = data;
+
+    handleMakeCartEmpty();
+
+    navigate(
+      `/success?street=${street}&number=${number}&district=${district}&city=${city}&uf=${uf}&paymentMethod=${paymentMethod}`
+    );
   }
 
   return (
@@ -111,7 +121,7 @@ export function CartInfos() {
         <button
           type="button"
           className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors hover:bg-yellow-700"
-          onClick={handleConfirmOrder}
+          onClick={handleSubmit(handleConfirmOrder)}
         >
           CONFIRMAR PEDIDO
         </button>

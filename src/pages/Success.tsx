@@ -1,5 +1,4 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export function Success() {
@@ -7,8 +6,8 @@ export function Success() {
 
   const street = searchParams.get("street");
   const number = searchParams.get("number");
+  const district = searchParams.get("district");
   const city = searchParams.get("city");
-  const state = searchParams.get("state");
   const uf = searchParams.get("uf");
   const paymentMethod = searchParams.get("paymentMethod");
 
@@ -40,7 +39,7 @@ export function Success() {
               <span className="font-bold ">
                 Rua {street}, {number}
               </span>{" "}
-              <br /> {city} - {state}, {uf}
+              <br /> {district} - {city}, {uf}
             </span>
           </div>
 
@@ -67,7 +66,7 @@ export function Success() {
             <span className="text-base-600">
               Forma de pagamento
               <br />
-              <span className="font-bold ">{paymentMethod}</span> <br />
+              <span className="font-bold">{paymentMethod}</span> <br />
             </span>
           </div>
         </div>
