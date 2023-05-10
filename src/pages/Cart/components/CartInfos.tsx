@@ -16,7 +16,10 @@ export function CartInfos() {
     handleMakeCartEmpty,
   } = useCart();
 
-  const { handleSubmit } = useFormContext<AddressFormType>();
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = useFormContext<AddressFormType>();
 
   const navigate = useNavigate();
 
@@ -26,7 +29,7 @@ export function CartInfos() {
     return prev + coffee.price * item.quantity;
   }, 0);
 
-  console.log(cartItems);
+  console.log(isValid);
 
   const hasNoItemInCart = cartItems.length === 0;
 
@@ -35,6 +38,10 @@ export function CartInfos() {
   const totalToPay = itemsTotalPrice + deliveryPrice;
 
   function handleConfirmOrder(data: AddressFormType) {
+    if (hasNoItemInCart) {
+      return;
+    }
+
     const { street, number, district, city, uf, paymentMethod } = data;
 
     handleMakeCartEmpty();
@@ -126,7 +133,7 @@ export function CartInfos() {
           type="button"
           className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors enabled:hover:bg-yellow-700 disabled:opacity-40"
           onClick={handleSubmit(handleConfirmOrder)}
-          disabled={hasNoItemInCart}
+          disabled={hasNoItemInCart || !isValid}
         >
           CONFIRMAR PEDIDO
         </button>
