@@ -3,6 +3,8 @@ import { ItemCount } from "../../../components/ItemCount";
 import { useCart } from "../../../hooks/useCart";
 import { currencyFormat } from "../../../utils/currencyFormat";
 import { coffeesList } from "../../Home/data/coffeesList";
+import { MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function CartInfos() {
   const {
@@ -11,6 +13,8 @@ export function CartInfos() {
     handleRemoveItemFromCart,
     handleMakeCartEmpty,
   } = useCart();
+
+  const navigate = useNavigate();
 
   const itemsTotalPrice = cartItems.reduce((prev, item) => {
     const coffee = coffeesList.find((coffee) => coffee.name === item.itemName);
@@ -21,6 +25,10 @@ export function CartInfos() {
   const deliveryPrice = itemsTotalPrice ? 3.5 : 0;
 
   const totalToPay = itemsTotalPrice + deliveryPrice;
+
+  function handleConfirmOrder() {
+    navigate("/success?nome=angelo&sobrenome=filho");
+  }
 
   return (
     <section className="mt-10 xl:mt-0 xl:col-span-2">
@@ -103,6 +111,7 @@ export function CartInfos() {
         <button
           type="button"
           className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors hover:bg-yellow-700"
+          onClick={handleConfirmOrder}
         >
           CONFIRMAR PEDIDO
         </button>
