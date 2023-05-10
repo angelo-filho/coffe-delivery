@@ -1,13 +1,16 @@
 import { Trash } from "phosphor-react";
-import { Link } from "react-router-dom";
 import { ItemCount } from "../../../components/ItemCount";
 import { useCart } from "../../../hooks/useCart";
 import { currencyFormat } from "../../../utils/currencyFormat";
 import { coffeesList } from "../../Home/data/coffeesList";
 
 export function CartInfos() {
-  const { cartItems, handleAddItemToCart, handleRemoveItemFromCart } =
-    useCart();
+  const {
+    cartItems,
+    handleAddItemToCart,
+    handleRemoveItemFromCart,
+    handleMakeCartEmpty,
+  } = useCart();
 
   const itemsTotalPrice = cartItems.reduce((prev, item) => {
     const coffee = coffeesList.find((coffee) => coffee.name === item.itemName);
@@ -97,14 +100,12 @@ export function CartInfos() {
           </div>
         </div>
 
-        <Link to="/success">
-          <button
-            type="button"
-            className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors hover:bg-yellow-700"
-          >
-            CONFIRMAR PEDIDO
-          </button>
-        </Link>
+        <button
+          type="button"
+          className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors hover:bg-yellow-700"
+        >
+          CONFIRMAR PEDIDO
+        </button>
       </div>
     </section>
   );

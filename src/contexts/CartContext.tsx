@@ -9,6 +9,7 @@ interface CartContextType {
   cartItems: CartItem[];
   handleAddItemToCart: (quantity: number, itemName: string) => void;
   handleRemoveItemFromCart: (itemName: string) => void;
+  handleMakeCartEmpty: () => void;
 }
 
 interface CartProviderProps {
@@ -40,6 +41,10 @@ export function CartProvider({ children }: CartProviderProps) {
     setCartItems((prev) => prev.filter((items) => items.itemName !== itemName));
   }
 
+  function handleMakeCartEmpty() {
+    setCartItems([]);
+  }
+
   function updateQuantityOfAnItem(quantity: number, itemName: string) {
     setCartItems((prev) =>
       prev.map((item) => {
@@ -62,6 +67,7 @@ export function CartProvider({ children }: CartProviderProps) {
         cartItems,
         handleAddItemToCart,
         handleRemoveItemFromCart,
+        handleMakeCartEmpty,
       }}
     >
       {children}
