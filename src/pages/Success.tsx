@@ -1,6 +1,17 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export function Success() {
+  const [searchParams] = useSearchParams();
+
+  const street = searchParams.get("street");
+  const number = searchParams.get("number");
+  const city = searchParams.get("city");
+  const state = searchParams.get("state");
+  const uf = searchParams.get("uf");
+  const paymentMethod = searchParams.get("paymentMethod");
+
   return (
     <main className="max-w-screen-xl mx-auto mt-20 px-4 pb-10 xl:px-0 flex flex-col xl:flex-row-reverse items-center xl:justify-between gap-10">
       <img
@@ -27,9 +38,9 @@ export function Success() {
             <span className="text-base-600">
               Entrega em{" "}
               <span className="font-bold ">
-                Rua João Daniel Martinelli, 102
+                Rua {street}, {number}
               </span>{" "}
-              <br /> Farrapos - Porto Alegre, RS
+              <br /> {city} - {state}, {uf}
             </span>
           </div>
 
@@ -54,9 +65,9 @@ export function Success() {
             </span>
 
             <span className="text-base-600">
-              Previsão de entrega
+              Forma de pagamento
               <br />
-              <span className="font-bold ">20 min - 30 min</span> <br />{" "}
+              <span className="font-bold ">{paymentMethod}</span> <br />
             </span>
           </div>
         </div>
