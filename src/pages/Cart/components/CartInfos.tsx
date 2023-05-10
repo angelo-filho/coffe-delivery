@@ -26,6 +26,10 @@ export function CartInfos() {
     return prev + coffee.price * item.quantity;
   }, 0);
 
+  console.log(cartItems);
+
+  const hasNoItemInCart = cartItems.length === 0;
+
   const deliveryPrice = itemsTotalPrice ? 3.5 : 0;
 
   const totalToPay = itemsTotalPrice + deliveryPrice;
@@ -120,8 +124,9 @@ export function CartInfos() {
 
         <button
           type="button"
-          className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors hover:bg-yellow-700"
+          className="w-full mt-6 py-3 bg-yellow-400 rounded-md text-white transition-colors enabled:hover:bg-yellow-700 disabled:opacity-40"
           onClick={handleSubmit(handleConfirmOrder)}
+          disabled={hasNoItemInCart}
         >
           CONFIRMAR PEDIDO
         </button>
