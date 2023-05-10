@@ -1,17 +1,17 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { BuyInfos } from "./components/BuyInfos";
 import { CartInfos } from "./components/CartInfos";
-import { number, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const addressFormValues = z.object({
-  cep: z.string().min(6),
-  street: z.string().min(1),
-  number: z.string().min(1),
-  district: z.string(),
+  cep: z.string().min(6, "Mínimo de 6 caracteres"),
+  street: z.string().min(1, "Mínimo de 1 caracteres"),
+  number: z.string().min(1, "Mínimo de 1 caracteres"),
+  district: z.string().min(1, "Mínimo de 1 caracteres"),
   complement: z.string().nullable(),
-  city: z.string().min(2),
-  uf: z.string().length(2, "Precisa ter 2 letras").toUpperCase(),
+  city: z.string().min(2, "Mínimo de 2 caracteres"),
+  uf: z.string().length(2, "Mínimo de 2 letras").toUpperCase(),
   paymentMethod: z.enum(["cartão de crédito", "cartão de débito", "dinheiro"]),
 });
 

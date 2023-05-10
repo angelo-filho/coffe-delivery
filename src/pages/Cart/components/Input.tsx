@@ -36,7 +36,10 @@ export function Input({
           Opcional
         </label>
       )}
-      {errors[name] && <span>{errors[name].message}</span>}
+
+      {errors[name] && (
+        <span className="mt-2 text-red-600">{errors[name].message}</span>
+      )}
     </div>
   );
 }
