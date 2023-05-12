@@ -3,7 +3,6 @@ import { ItemCount } from "../../../components/ItemCount";
 import { useCart } from "../../../hooks/useCart";
 import { currencyFormat } from "../../../utils/currencyFormat";
 import { coffeesList } from "../../Home/data/coffeesList";
-import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import { AddressFormType } from "..";
@@ -69,13 +68,13 @@ export function CartInfos() {
             return (
               <li
                 key={coffee!.name}
-                className="flex justify-between py-6 border-b border-b-base-300 first:pt-0"
+                className="flex justify-between gap-2 py-6 border-b border-b-base-300 first:pt-0"
               >
                 <div className="flex gap-5">
                   <img
                     src={coffee!.imgURL}
                     alt={coffee!.name}
-                    className="h-16 object-contain hidden sm:inline"
+                    className="h-12 sm:h-16 object-contain sm:inline"
                   />
 
                   <div className="flex flex-col gap-2">
@@ -98,7 +97,7 @@ export function CartInfos() {
                         onClick={() => handleRemoveItemFromCart(coffee!.name)}
                       >
                         <Trash size={16} className="text-purple-400" />
-                        <span>REMOVER</span>
+                        <span className="hidden sm:inline">REMOVER</span>
                       </button>
                     </div>
                   </div>
