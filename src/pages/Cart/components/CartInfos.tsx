@@ -28,8 +28,6 @@ export function CartInfos() {
     return prev + coffee.price * item.quantity;
   }, 0);
 
-  console.log(isValid);
-
   const hasNoItemInCart = cartItems.length === 0;
 
   const deliveryPrice = itemsTotalPrice ? 3.5 : 0;
